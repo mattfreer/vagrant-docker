@@ -1,11 +1,17 @@
-cd ~/
-git clone "https://github.com/mattfreer/dotvim.git"
-ln -s ~/dotvim ~/.vim
-ln -s ~/dotvim/.vimrc ~/.vimrc
-cd ~/.vim
-git submodule init
-git submodule update
+DOTVIM_DIR=~/dotvim
+if [ ! -d "$DOTVIM_DIR" ]; then
+  cd ~/
+  git clone "https://github.com/mattfreer/dotvim.git"
+  ln -s ~/dotvim ~/.vim
+  ln -s ~/dotvim/.vimrc ~/.vimrc
+  cd ~/.vim
+  git submodule init
+  git submodule update
+fi
 
-cd ~/
-git clone "https://github.com/mattfreer/dottmux.git"
-ln -s ~/dottmux/.tmux.conf ~/.tmux.conf
+DOTTMUX_DIR=~/dottmux
+if [ ! -d "$DOTTMUX_DIR" ]; then
+  cd ~/
+  git clone "https://github.com/mattfreer/dottmux.git"
+  ln -s ~/dottmux/.tmux.conf ~/.tmux.conf
+fi
