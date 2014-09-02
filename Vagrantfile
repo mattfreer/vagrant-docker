@@ -13,8 +13,9 @@ class ConfigHelper
 
   def shared_dirs(&b)
     Dir.foreach(parent_dir) do |item|
-      next if file_blacklist.include?(item) || File.directory?(item)
-      b.call(item)
+      if !file_blacklist.include?(item) && directory?(item, "..")
+        b.call(item)
+      end
     end
   end
 
@@ -22,6 +23,10 @@ class ConfigHelper
 
   def file_blacklist
     ['.', '..', File.basename(Dir.pwd)]
+  end
+
+  def directory?(file, path_start)
+    File.directory?(File.expand_path(file, path_start))
   end
 
   def parent_dir
