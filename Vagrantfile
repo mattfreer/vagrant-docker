@@ -43,6 +43,7 @@ Vagrant.configure("2") do |config|
   config.vm.network :private_network, ip: config_helper.ip
   config.ssh.forward_agent = true
   config.vm.provision :shell, :path => "bootstrap.sh"
+  config.vm.provision :shell, :path => "recipes/docker_setup.sh"
   config.vm.provision :shell, :path => "recipes/tmux.sh"
   config.vm.provision :shell, :path => "recipes/dotfiles.sh", :privileged => false
 
