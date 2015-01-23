@@ -11,22 +11,29 @@ class ConfigHelper
     ip = (defined?(ENV["IP"])) ? ENV["IP"] : DEFAULT_IP
   end
 
-  def shared_dirs(&b)
-    Dir.foreach(parent_dir) do |item|
-      if !file_blacklist.include?(item) && directory?(item, "..")
-        b.call(item)
+  def shared_dirs()
+    Dir.foreach(parent_dir).reduce([]) do |shares, item|
+      path = File.join(parent_dir, item)
+
+      if !blacklisted?(item) && File.directory?(path)
+        shares << item
       end
+      shares
     end
   end
 
   private
 
-  def file_blacklist
-    ['.', '..', File.basename(Dir.pwd)]
+  def dot_file?(file)
+    !file.match(/^\./).nil?
   end
 
-  def directory?(file, path_start)
-    File.directory?(File.expand_path(file, path_start))
+  def current_dir?(file)
+    [File.basename(Dir.pwd)].include?(file)
+  end
+
+  def blacklisted?(file)
+    [dot_file?(file), current_dir?(file)].include?(true)
   end
 
   def parent_dir
@@ -47,7 +54,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, :path => "recipes/tmux.sh"
   config.vm.provision :shell, :path => "recipes/dotfiles.sh", :privileged => false
 
-  config_helper.shared_dirs do |dir|
+  config_helper.shared_dirs.each do |dir|
     config.vm.synced_folder "./../#{ dir }", "/#{ dir }", nfs: true
   end
 
