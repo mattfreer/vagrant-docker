@@ -1,7 +1,7 @@
 class ConfigHelper
   DEFAULT_IP="192.168.10.10"
   DEFAULT_MEMORY="2048"
-  BOX_URL="https://oss-binaries.phusionpassenger.com/vagrant/boxes/ubuntu-12.04.3-amd64-vbox.box"
+  BOX_URL="https://oss-binaries.phusionpassenger.com/vagrant/boxes/latest/ubuntu-14.04-amd64-vbox.box"
 
   def memory
     (defined?(ENV["MEM"])).nil? ? ENV["MEM"] : DEFAULT_MEMORY

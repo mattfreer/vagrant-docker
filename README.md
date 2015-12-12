@@ -1,7 +1,7 @@
 vagrant-docker
 ==============
 
-A vagrant provision of a base ubuntu 12.04 (3.8 kernel) with docker already installed
+A vagrant provision of a base ubuntu 14.04
 
 This is just a wrapper for the vagrant docker image at:
 https://oss-binaries.phusionpassenger.com/vagrant/boxes/
