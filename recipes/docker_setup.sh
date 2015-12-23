@@ -14,4 +14,4 @@ sudo sed -i "/exec \"\$DOCKER\"/c\exec \"\$DOCKER\" -d \$DOCKER_OPTS --insecure-
 sudo service docker start
 
 # Pull docker images specified in fig file
-cd /scripts/ && sudo fig pull --allow-insecure-ssl
+cd /scripts/ && sudo docker-compose pull
