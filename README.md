@@ -1,7 +1,7 @@
 vagrant-docker
 ==============
 
-A vagrant provision of a base ubuntu 14.04
+A vagrant provision of a base ubuntu 15.10
 
 This is just a wrapper for the vagrant docker image at:
 https://oss-binaries.phusionpassenger.com/vagrant/boxes/

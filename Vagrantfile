@@ -1,7 +1,6 @@
 class ConfigHelper
   DEFAULT_IP="192.168.10.10"
   DEFAULT_MEMORY="2048"
-  BOX_URL="https://oss-binaries.phusionpassenger.com/vagrant/boxes/latest/ubuntu-14.04-amd64-vbox.box"
 
   def memory
     (defined?(ENV["MEM"])).nil? ? ENV["MEM"] : DEFAULT_MEMORY
@@ -44,8 +43,7 @@ end
 config_helper = ConfigHelper.new
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "precise64-docker"
-  config.vm.box_url = ConfigHelper::BOX_URL
+  config.vm.box = "sgallen/wily64"
 
   config.vm.network :private_network, ip: config_helper.ip
   config.ssh.forward_agent = true
