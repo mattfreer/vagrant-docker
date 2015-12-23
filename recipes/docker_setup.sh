@@ -4,14 +4,13 @@ if [ -z "$REGISTRY_IP" ]; then
 fi
 
 # stop docker
-sudo service docker stop
+systemctl stop docker
 
-# In docker upstart conf file, change line that includes: 'exec "$DOCKER"'
-# to pass `insecure-registry` option to docker binary
-sudo sed -i "/exec \"\$DOCKER\"/c\exec \"\$DOCKER\" -d \$DOCKER_OPTS --insecure-registry $REGISTRY_IP" /etc/init/docker.conf
+# Pass `insecure-registry` option to docker binary
+sh -c 'echo "DOCKER_OPTS=\"-r=true --insecure-registry 192.168.10.10:5000 \${DOCKER_OPTS}\"" > /etc/default/docker'
 
 # start docker
-sudo service docker start
+systemctl start docker
 
 # Pull docker images specified in fig file
-cd /scripts/ && sudo docker-compose pull
+cd /scripts/ && docker-compose pull
