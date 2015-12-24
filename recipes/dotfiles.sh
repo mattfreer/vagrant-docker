@@ -1,17 +1,16 @@
-DOTVIM_DIR=~/dotvim
-if [ ! -d "$DOTVIM_DIR" ]; then
-  cd ~/
-  git clone "https://github.com/mattfreer/dotvim.git"
-  ln -s ~/dotvim ~/.vim
-  ln -s ~/dotvim/.vimrc ~/.vimrc
-  cd ~/.vim
-  git submodule init
-  git submodule update
-fi
+mkdir -p ~/dotfiles
+cd ~/dotfiles
+git clone https://github.com/mattfreer/dotfiles.git .
+stow vim
+stow tmux
+stow git
 
-DOTTMUX_DIR=~/dottmux
-if [ ! -d "$DOTTMUX_DIR" ]; then
-  cd ~/
-  git clone "https://github.com/mattfreer/dottmux.git"
-  ln -s ~/dottmux/.tmux.conf ~/.tmux.conf
-fi
+#Install vim plugins
+cd ~/.vim
+git submodule init && git submodule update
+
+#Install tmux plugins
+mkdir ~/.tmux/plugins
+cd ~/.tmux/plugins/
+git clone https://github.com/tmux-plugins/tpm
+./tpm/scripts/install_plugins.sh
