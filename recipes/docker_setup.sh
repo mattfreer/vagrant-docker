@@ -1,13 +1,17 @@
-# if $REGISTRY_IP env variable is not set then set a script var
-if [ -z "$REGISTRY_IP" ]; then
-  REGISTRY_IP='192.168.10.10:5000'
-fi
-
 # stop docker
 systemctl stop docker
 
-# Pass `insecure-registry` option to docker binary
-sh -c 'echo "DOCKER_OPTS=\"-r=true --insecure-registry 192.168.10.10:5000 \${DOCKER_OPTS}\"" > /etc/default/docker'
+#Inform client that the self signed ssl cert that the Docker registry uses is legitimate
+CERT_FILE="/certs/devdockerCA.crt"
+
+if [ -f $CERT_FILE ];
+then
+  mkdir /usr/local/share/ca-certificates/docker-dev-cert
+  cp $CERT_FILE /usr/local/share/ca-certificates/docker-dev-cert
+  update-ca-certificates
+else
+  echo "File $CERT_FILE does not exists"
+fi
 
 # start docker
 systemctl start docker
