@@ -1,15 +1,18 @@
 vagrant-docker
 ==============
 
-A vagrant provision of a base ubuntu 15.10
-
-This is just a wrapper for the vagrant docker image at:
-https://oss-binaries.phusionpassenger.com/vagrant/boxes/
+A vagrant provision of a base ubuntu 15.10, that has docker and
+docker-compose installed.
 
 ##Installs:
-* lxc-docker (as this is docker-io)
-* git (so you can clone docker images via git)
-* symlinks dotfiles for vim and tmux
+* docker-engine
+* docker-compose
+* wget
+* git
+* vim
+* tmux
+* stow
+* dotfiles for vim and tmux
 
 ##Configuration:
 The following config settings can be managed via environment variables (the defaults are displayed in brackets):
