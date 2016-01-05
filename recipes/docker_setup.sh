@@ -16,6 +16,3 @@ fi
 
 # start docker
 systemctl start docker
-
-# Pull docker images specified in fig file
-cd /scripts/ && docker-compose pull
