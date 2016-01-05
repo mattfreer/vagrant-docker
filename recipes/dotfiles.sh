@@ -10,7 +10,6 @@ cd ~/.vim
 git submodule init && git submodule update
 
 #Install tmux plugins
-mkdir ~/.tmux/plugins
 cd ~/.tmux/plugins/
 git clone https://github.com/tmux-plugins/tpm
 ./tpm/scripts/install_plugins.sh
