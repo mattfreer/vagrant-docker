@@ -2,7 +2,7 @@
 systemctl stop docker
 
 #Inform client that the self signed ssl cert that the Docker registry uses is legitimate
-CERT_FILE="/certs/devdockerCA.crt"
+CERT_FILE="/certs/private-registry.dev/devdockerCA.crt"
 
 if [ -f $CERT_FILE ];
 then
